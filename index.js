@@ -23,13 +23,49 @@ db.connect((err)=>{
 
 
 app.get('/', (req, res)=>{
-    db.query('INSERT INTO TEST VALUES(100)',(err, result)=>{
-        res.send('test')
-    })
+    res.send('homepage');
 
 })
 
+// app.get('/:num/:num2', (req, res)=>{
+//     db.query('INSERT INTO TEST VALUES(?)',[req.params.num], (err, result)=>{
+//         console.log('one insert')
+//     })
+//     db.query('INSERT INTO TEST VALUES(?)',[req.params.num2], (err, result)=>{
+//         console.log('two insert')
+//         res.send('second insert successful')
+//     })
+// })
 
-app.listen(3000, ()=>{
+app.get('/customer/:id', (req, res)=>{
+    db.query('SELECT * FROM CUSTOMER WHERE CUSTOMER_ID=?', [req.params.id], (err, result)=>{
+        res.send(result)
+    })
+})
+
+
+app.get('/employee/:id', (req, res)=>{
+    db.query('SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID=?', [req.params.id], (err, result)=>{
+        res.send(result)
+    })
+})
+
+app.get('/customer/order/:id', (req, res)=>{
+    db.query('SELECT * FROM ORDERS WHERE CUSTOMER_ID=?', [req.params.id], (err, result)=>{
+        res.send(result);
+    })
+})
+
+
+app.get('/employee/order/:id', (req, res)=>{
+    db.query('SELECT * FROM ORDERS WHERE EMPLOYEE_ID=?', [req.params.id], (err, result)=>{
+        res.send(result);
+    })
+})
+
+
+
+
+app.listen(3001, ()=>{
     console.log('working')
 })
