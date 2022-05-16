@@ -1,13 +1,13 @@
 const express =require('express')
 const app=express()
-const mysql = require('mysql')
+const mysql = require('mysql2')
 
 
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'password',
-    database: 'DeepakDB1',
+    database: 'FoodSystem',
     port: 3306
 })
 
