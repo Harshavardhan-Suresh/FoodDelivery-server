@@ -81,10 +81,10 @@ app.get('/customer/orders/:id', (req, res)=>{
 })
 
 app.post('/customer/orders/:id', (req, res)=>{
-    const {order_ID, customer_ID, employee_ID, restaurant_ID, details}=req.body
-    const st=req.body.status
+    const {order_ID, customer_ID, employee_ID, restaurant_ID, status,details}=req.body
+    // const st=req.body.status
 
-    db.query('INSERT INTO ORDERS (ORDER_ID, STATUS, CUSTOMER_ID, EMPLOYEE_ID, RESTAURANT_ID) values (?, ?, ?, ?, ?)', [order_ID, st, customer_ID, employee_ID, restaurant_ID], (err, result)=>{
+    db.query('INSERT INTO ORDERS (ORDER_ID, STATUS, CUSTOMER_ID, EMPLOYEE_ID, RESTAURANT_ID) values (?, ?, ?, ?, ?)', [order_ID, status, customer_ID, employee_ID, restaurant_ID], (err, result)=>{
         details.forEach((detail)=>{
             const {food_name, quantity}=detail
             db.query('INSERT INTO ORDER_DETAILS (ORDER_ID, FOOD_NAME, QUANTITY) values (?,?,?)', [order_ID, food_name, quantity])
